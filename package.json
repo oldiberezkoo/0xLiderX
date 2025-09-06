@@ -1,0 +1,22 @@
+{
+	"name": "xestate",
+	"private": true,
+	"workspaces": [
+		"apps/*",
+		"packages/*"
+	],
+	"scripts": {
+		"check": "biome check --write .",
+		"dev": "pnpm -r dev",
+		"build": "pnpm -r build",
+		"check-types": "pnpm -r check-types",
+		"dev:native": "pnpm --filter native dev",
+		"dev:web": "pnpm --filter web dev",
+		"dev:server": "pnpm --filter server dev"
+	},
+	"dependencies": {},
+	"devDependencies": {
+		"@biomejs/biome": "^2.2.0"
+	},
+	"packageManager": "pnpm@10.8.0"
+}
