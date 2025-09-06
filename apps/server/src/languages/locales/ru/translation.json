@@ -1,0 +1,6 @@
+{
+  "AuthorizationTokenRequired": "Требуется токен авторизации",
+  "AuthorizationTokenFormatInvalid": "Неверный формат токена авторизации",
+  "AuthorizationTokenNull": "Токен авторизации отсутствует",
+  "InternalValidationError": "Внутренняя ошибка валидации"
+}

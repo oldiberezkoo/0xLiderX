@@ -1,0 +1,6 @@
+{
+  "AuthorizationTokenRequired": "Avtorizatsiya tokeni talab qilinadi",
+  "AuthorizationTokenFormatInvalid": "Avtorizatsiya tokeni formati noto'g'ri",
+  "AuthorizationTokenNull": "Avtorizatsiya tokeni bo'sh",
+  "InternalValidationError": "Ichki tekshirish xatosi"
+}
