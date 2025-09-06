@@ -1,0 +1,6 @@
+{
+  "AuthorizationTokenRequired": "Authorization token is required",
+  "AuthorizationTokenFormatInvalid": "Authorization token format is invalid",
+  "AuthorizationTokenNull": "Authorization token is null",
+  "InternalValidationError": "Internal validation error"
+}

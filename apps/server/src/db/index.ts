@@ -1,7 +1,8 @@
 import { consola } from "consola";
-import mongoose, { Connection, Mongoose } from "mongoose";
+import type { Connection as MongooseConnection } from "mongoose";
+import mongoose from "mongoose";
 
-let cachedConnection: Connection | null = null;
+let cachedConnection: MongooseConnection | null = null;
 let cachedClient: any = null;
 
 type DBOptions = {
@@ -44,7 +45,7 @@ async function connectToDatabase(
   }
 
   try {
-    const mongooseInstance: Mongoose = await mongoose.connect(uri, {
+    const mongooseInstance = await mongoose.connect(uri, {
       ...defaultOptions,
       ...options,
       dbName,
