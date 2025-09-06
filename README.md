@@ -1,6 +1,6 @@
 # xestate
 
-This project was created with [Better-T-Stack](https://github.com/AmanVarshney01/create-better-t-stack), a modern TypeScript stack that combines React, TanStack Router, Elysia, and more.
+This project was created with [Better-T-Stack](https://github.com/AmanVarshney01/create-better-t-stack), a modern TypeScript stack that combines React, TanStack Router, Hono, and more.
 
 ## Features
 
@@ -8,11 +8,10 @@ This project was created with [Better-T-Stack](https://github.com/AmanVarshney01
 - **TanStack Router** - File-based routing with full type safety
 - **TailwindCSS** - Utility-first CSS for rapid UI development
 - **shadcn/ui** - Reusable UI components
-- **Elysia** - Type-safe, high-performance framework
-- **Bun** - Runtime environment
+- **Hono** - Lightweight, performant server framework
+- **Node.js** - Runtime environment
 - **Mongoose** - TypeScript-first ORM
 - **MongoDB** - Database engine
-- **Biome** - Linting and formatting
 
 ## Getting Started
 
@@ -53,7 +52,7 @@ The API is running at [http://localhost:3000](http://localhost:3000).
 xestate/
 ├── apps/
 │   ├── web/         # Frontend application (React + TanStack Router)
-│   └── server/      # Backend API (Elysia)
+│   └── server/      # Backend API (Hono)
 ```
 
 ## Available Scripts
@@ -65,4 +64,3 @@ xestate/
 - `pnpm check-types`: Check TypeScript types across all apps
 - `pnpm db:push`: Push schema changes to database
 - `pnpm db:studio`: Open database studio UI
-- `pnpm check`: Run Biome formatting and linting
