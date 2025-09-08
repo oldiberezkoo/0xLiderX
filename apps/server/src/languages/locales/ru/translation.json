@@ -2,5 +2,7 @@
   "AuthorizationTokenRequired": "Требуется токен авторизации",
   "AuthorizationTokenFormatInvalid": "Неверный формат токена авторизации",
   "AuthorizationTokenNull": "Токен авторизации отсутствует",
-  "InternalValidationError": "Внутренняя ошибка валидации"
+  "InternalValidationError": "Внутренняя ошибка валидации",
+  "JWT_EXPIRED": "Срок действия токена истек",
+  "JWT_INVALID": "Недействительный токен"
 }
