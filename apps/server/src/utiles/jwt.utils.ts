@@ -16,14 +16,13 @@ export interface JwtVerifyResult {
   decoded: jwt.JwtPayload | null;
 }
 
-export function signAccessToken(payload: object): string {
+export function signAccessToken(payload: Record<string, unknown>): string {
   return jwt.sign(payload, JWT_SECRET!, { expiresIn: ACCESS_EXPIRES_IN });
 }
 
-export function signRefreshToken(payload: object): string {
+export function signRefreshToken(payload: Record<string, unknown>): string {
   return jwt.sign(payload, JWT_SECRET!, { expiresIn: REFRESH_EXPIRES_IN });
 }
-
 export function verifyJwt(token: string): JwtVerifyResult {
   try {
     const decoded = jwt.verify(token, JWT_SECRET!) as jwt.JwtPayload;
@@ -33,10 +32,17 @@ export function verifyJwt(token: string): JwtVerifyResult {
       decoded,
     };
   } catch (error) {
-    if (error instanceof Error) {
+    if (error instanceof jwt.TokenExpiredError) {
       return {
         valid: false,
-        expired: error.message === "jwt expired",
+        expired: true,
+        decoded: null,
+      };
+    }
+    if (error instanceof jwt.JsonWebTokenError) {
+      return {
+        valid: false,
+        expired: false,
         decoded: null,
       };
     }

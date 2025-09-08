@@ -8,7 +8,7 @@ export interface UserDocument extends mongoose.Document {
   avatar: string;
   isActive: boolean;
   name: string;
-  role: string;
+  role: Role;
   refreshTokens: string[];
 }
 export const roles = {
@@ -17,13 +17,17 @@ export const roles = {
   manager: "manager",
   guest: "guest",
   developer: "developer",
-};
+} as const;
+
+export type Role = (typeof roles)[keyof typeof roles];
 
 export const UserSchema = new mongoose.Schema<UserDocument>(
   {
     email: {
       type: String,
       required: true,
+      trim: true,
+      lowercase: true,
       unique: true,
     },
     password: {
@@ -44,13 +48,14 @@ export const UserSchema = new mongoose.Schema<UserDocument>(
     },
     role: {
       type: String,
-      enum: roles,
+      enum: Object.values(roles),
       default: roles.guest,
       required: true,
     },
     refreshTokens: {
       type: [String],
       default: [],
+      select: false,
     },
   },
   {
@@ -60,10 +65,10 @@ export const UserSchema = new mongoose.Schema<UserDocument>(
 
 UserSchema.pre("save", async function (next) {
   const user = this as UserDocument;
-  const avatar = user.avatar;
-  if (!user.isModified("avatar")) {
+  if (!user.isModified("avatar") && !user.avatar) {
     user.avatar = gravatar(user.email, 256);
   }
+
   if (!user.isModified("password")) {
     return next();
   }
@@ -73,5 +78,4 @@ UserSchema.pre("save", async function (next) {
 
   next();
 });
-
-UserSchema.index({ acessToken: 1 }, { unique: true });
+UserSchema.index({ refreshTokens: 1 }, { unique: true });

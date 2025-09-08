@@ -3,18 +3,20 @@ import { verifyJwt } from "../utiles/jwt.utils";
 import i18next from "i18next";
 
 export async function authenticate(c: Context, next: Next) {
-  const accessToken = c.req.header("Authorization")?.split(" ")[1];
-  if (!accessToken) {
-    return c.text(i18next.t("AuthorizationTokenRequired"), 401);
+  const auth = c.req.header("authorization");
+  if (!auth) return c.text(i18next.t("AuthorizationTokenRequired"), 401);
+  const [scheme, token] = auth.split(/\s+/);
+  if (!/^Bearer$/i.test(scheme) || !token) {
+    return c.text(i18next.t("AuthorizationTokenFormatInvalid"), 401);
   }
 
-  const { decoded, expired } = verifyJwt(accessToken);
+  const { decoded, expired, valid } = verifyJwt(token);
 
   if (expired) {
     return c.text(i18next.t("JWT_EXPIRED"), 401);
   }
 
-  if (!decoded) {
+  if (!valid || !decoded) {
     return c.text(i18next.t("JWT_INVALID"), 401);
   }
 
