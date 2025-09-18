@@ -1,4 +1,5 @@
 <template>
+
   <div
     class="min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-50 to-slate-100 p-4"
   >
@@ -237,9 +238,11 @@
 </template>
 
 <script setup lang="ts">
-import { ref, reactive, onMounted } from 'vue'
+import { ref, reactive, onMounted, markRaw, shallowRef } from 'vue'
 import { useSessionStore } from '@/entities/session/model/store'
+import { useRouter } from 'vue-router'
 
+const router = useRouter()
 const sessionStore = useSessionStore()
 
 const activeTab = ref('login')
@@ -304,6 +307,7 @@ const handleLogin = async () => {
       type: 'success',
       text: 'Успешный вход!',
     }
+    router.push('/about')
 
     loginForm.email = ''
     loginForm.password = ''

@@ -14,7 +14,7 @@ export interface JwtVerifyResult {
   valid: boolean;
   expired: boolean;
   decoded: jwt.JwtPayload | null;
-}
+} 
 
 export function signAccessToken(payload: Record<string, unknown>): string {
   return jwt.sign(payload, JWT_SECRET!, { expiresIn: ACCESS_EXPIRES_IN });
